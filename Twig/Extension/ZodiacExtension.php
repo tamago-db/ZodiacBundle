@@ -84,8 +84,8 @@ class ZodiacExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'zodiac' => new \Twig_Filter_Method($this, 'getZodiacString', array('is_safe' => array('html'))),
-            'zodiac_sign' => new \Twig_Filter_Method($this, 'getZodiacSign', array('is_safe' => array('html')))
+            new \Twig_SimpleFilter('zodiac', [$this, 'getZodiacString', array('is_safe' => array('html'))]),
+            new \Twig_SimpleFilter('zodiac_sign', [$this, 'getZodiacSign', array('is_safe' => array('html'))])
         );
     }
 
@@ -95,8 +95,7 @@ class ZodiacExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'zodiac' => new \Twig_Function_Method($this, 'renderZodiacString', array('pre_escape' => 'html', 'is_safe' => array('html')
-            )),
+            new \Twig_SimpleFunction('zodiac', [$this, 'renderZodiacString', array('pre_escape' => 'html', 'is_safe' => array('html'))]),
         );
     }
 
